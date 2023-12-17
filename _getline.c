@@ -1,25 +1,25 @@
 #include "main.h"
 
 /**
- * _getinput - function that reads char from user input
+ * _getchar - function that reads char from user input
  *
  * Return: returns the input
  */
 
-char _getinput(void)
+char _getchar(void)
 {
-char *buff;
+char *buf;
 char c;
 int i = 0;
 
-buff = malloc(2);
+buf = malloc(2);
 
-if (!buff)
+if (!buf)
 return (-1);
 
 fflush(stdout);
 
-i = read(1, buff, 1);
+i = read(1, buf, 1);
 if (i == -1)
 {
 perror("Reading Input");
@@ -32,7 +32,7 @@ fflush(stdout);
 exit(1);
 }
 
-c = *buff;
+c = *buf;
 
 return (c);
 }
@@ -40,12 +40,12 @@ return (c);
 /**
  * _getline - reads a line from the standard input
  * @line: a pointer to a pointer of location to save the string
- * @size_char: characters read size
+ * @len: characters read size
  *
  * Return: returns the size
  */
 
-int _getline(char **line, size_t *size_char)
+int _getline(char **line, size_t *len)
 {
 size_t limit = 25;
 char *tmp;
@@ -53,14 +53,14 @@ char *tmp;
 line[0] = malloc(25);
 if (!line[0])
 return (-1);
-*size_char = 0;
+*len = 0;
 
-while (line[0][*size_char - 1] != '\n')
+while (line[0][*len - 1] != '\n')
 {
-line[0][*size_char] = _getinput();
-*size_char += 1;
+line[0][*len] = _getchar();
+*len += 1;
 
-if (*size_char > (limit - 3))
+if (*len > (limit - 3))
 {
 tmp = realloc(line[0], limit + 10);
 if (tmp)
@@ -71,17 +71,17 @@ limit += 10;
 }
 }
 
-return (*size_char);
+return (*len);
 }
 
 /**
- * echo_text - echos back text
+ * echoer - echoes back text
  * @line: array of command, arguments
  *
  * Return: returns 1 in success. Otherwise -1
  */
 
-int echo_text(char *line[])
+int echoer(char *line[])
 {
 int i = 1;
 
@@ -93,7 +93,7 @@ return (1);
 
 while (line[i] != NULL)
 {
-write(1, line[i], strsize_charg(line[i]));
+write(1, line[i], strleng(line[i]));
 i++;
 if (line[i] != NULL)
 {

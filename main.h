@@ -15,7 +15,7 @@ extern char **environ;
 extern int errno;
 
 /**
- * struct selectfunction - a struct array of functions
+ * struct selectfunction - especially for struct array for function
  * @command: a pointer to the caharacter of the command string
  * @funcptr: a pointer to a function
  */
@@ -29,8 +29,12 @@ int (*funcptr)(char **line);
 
 
 /* Function Prototypes */
-void sigint_(int sig_num __attribute__((unused)))
+void sigintHandler(int sig_num __attribute__((unused)));
+void printprompt(int i);
+int exitor(char *line[]);
+int cater(char *line[]);
 int getstr(char *str);
+int shellprocessor(char **line, char **argv);
 char **strbrk(char *line, char c);
 int _getline(char **line, size_t *len);
 void farewell(void);
@@ -41,26 +45,16 @@ int strleng(char *s);
 void strcopy(char *src, char *dest);
 int strcomp(char *str, char *equ);
 void strmix(char *src, char *dest);
+int lister(char **line);
 int (*getfunc(char *str))(char **line);
 int echorr(char *line[]);
+int builtincom(char **line);
+int changedire(char **line);
 int pwder(char *line[]);
 int envir(char *line[]);
 int maker(char *line[]);
+char _getchar(void);
 char *stringer(char *line, int i, char *str, char c);
-char _getinput(void);
-void prompt_dis(int i);
-int _getline(char **line, size_t *size_char);
-int echo_text(char *line[]);
-int shell_pro(char **line, char **argv)
-int exit_(char *line[]);
-int list(char *line[]);
-int set_exe(char *line[]);
-int unlisted(char **line);
-int pwder(char *line[]);
-int echorr(char *line[]);
-int exit_(char *line[]);
-int changedir(char **line);
-int getstr(char *str)
 
 
 

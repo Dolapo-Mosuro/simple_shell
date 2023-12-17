@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
-* exit_ - exit from the program
+* exitor - exit from the program
 * @line: array of command, arguments
 *
 * Return: nill
 */
 
-int exit_(char *line[])
+int exitor(char *line[])
 {
 int i = 0;
 if (line[1] == NULL)
@@ -21,13 +21,13 @@ exit(i);
 }
 
 /**
-* changedir - change a directory
+* changedire - change a directory
 * @line: an array of commands and arguments
 *
 * Return: returns 0 in success and -1 otherwise
 */
 
-int changedir(char **line)
+int changedire(char **line)
 {
 if (line[1] == NULL)
 {
@@ -49,13 +49,13 @@ return (1);
 }
 
 /**
-* prompt_dis - display the enter command character
+* promptprompt - display the enter command character
 * @i: an integer value to show which icon to display
 *
 * Return: void
 */
 
-void prompt_dis(int i)
+void promptprompt(int i)
 {
 if (i == 0)
 {

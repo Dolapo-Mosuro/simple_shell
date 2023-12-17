@@ -52,9 +52,9 @@ return (1);
 }
 
 /**
- * stringer - a helper function to the string breaker
+ * stringer - a sipport function to the string breaker
  * @line: a string pointer
- * @i: the index of the start of the string
+ * @i: start of the string index
  * @str: a string pointer to the location
  * @c: a character which specifys where to end the string
  *

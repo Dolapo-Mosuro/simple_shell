@@ -11,13 +11,13 @@ int (*getfunc(char *str))(char **line)
 {
 int i = 0;
 selecte selector[] = {
-{"ls", list},
-{"l", list},
-{"ll", list},
+{"ls", lister},
+{"l", lister},
+{"ll", lister},
 {"exit", exitor},
 {"echo", echorr},
 {"cd", changedire},
-{"cat", set_exe},
+{"cat", cater},
 {"pwd", pwder},
 {"env", envir},
 {"printenv", envir},
@@ -40,14 +40,14 @@ return (selector[i].funcptr);
 }
 
 /**
- * shell_pro - = excutes given commands
+ * shell_processor -  excutes given commands
  * @line: a pointer to an array of strings
  * @argv: a pointer to an array of arguments
  *
  * Return: returns 1 in success and -1 otherwise.
  */
 
-int shell_pro(char **line, char **argv)
+int shell_processor(char **line, char **argv)
 {
 int check;
 int i = 0;

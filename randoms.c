@@ -55,7 +55,7 @@ printstar();
 
 
 /**
- * printstar - prints a star line
+ * printstar - print astar line
  *
  * Return: void
  */

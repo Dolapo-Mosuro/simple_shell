@@ -30,17 +30,17 @@ return (array);
 }
 
 /**
- * sigint_ - handle the ctrl-c signal
+ * sigintHandler - handle the ctrl-c signal
  * @sig_num: an integer signal indicator
  *
  * Return: void function
  */
 
-void sigint_(int sig_num __attribute__((unused)))
+void sigintHandler(int sig_num __attribute__((unused)))
 {
-signal(SIGINT, sigint_);
+signal(SIGINT, sigintHandler);
 write(1, "\n", 2);
-prompt_dis(0);
+printprompt(0);
 fflush(stdout);
 }
 
@@ -70,7 +70,7 @@ if (getstr(line) == (-1))
 write(1, "\n", 2);
 exit(1);
 }
-if (shell_pro(strbrk(line, ' '), argv) == -1)
+if (shellprocessor(strbrk(line, ' '), argv) == -1)
 {
 perror("Error");
 }
@@ -86,7 +86,7 @@ write(1, "\n", 2);
 exit(0);
 }
 
-if ((shell_pro(strbrk(line, ' '), argv)) == -1)
+if ((shellprocessor(strbrk(line, ' '), argv)) == -1)
 {
 perror("Error");
 }

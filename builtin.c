@@ -1,174 +1,106 @@
 #include "main.h"
 
 /**
-* list - This excutes /bin/ls program to list files
-* @line: array of command, argument
-*
-* Return: returns 1 in success. Otherwise -1
-*/
+ * _getchar - function that reads char from user input
+ *
+ * Return: returns the input
+ */
 
-int list(char *line[])
+char _getchar(void)
 {
-int state;
-pid_t wait_p, child;
+char *buf;
+char c;
+int i = 0;
 
-child = fork();
-if (child == -1)
+buf = malloc(2);
+
+if (!buf)
+return (-1);
+
+fflush(stdout);
+
+i = read(1, buf, 1);
+if (i == -1)
 {
-perror("Forking ...");
+perror("Reading Input");
+return (-1);
+}
+else if (i == 0)
+{
+write(1, "\n", 2);
+fflush(stdout);
+exit(1);
 }
 
-if (child == 0)
-{
-execve("/bin/ls", line, NULL);
+c = *buf;
+
+return (c);
 }
+
+/**
+ * _getline - reads a line from the standard input
+ * @line: a pointer to a pointer of location to save the string
+ * @len: characters read size
+ *
+ * Return: returns the size
+ */
+
+int _getline(char **line, size_t *len)
+{
+size_t limit = 25;
+char *tmp;
+
+line[0] = malloc(25);
+if (!line[0])
+return (-1);
+*len = 0;
+
+while (line[0][*len - 1] != '\n')
+{
+line[0][*len] = _getchar();
+*len += 1;
+
+if (*len > (limit - 3))
+{
+tmp = realloc(line[0], limit + 10);
+if (tmp)
+line[0] = tmp;
 else
-{
-wait_p = wait(&state);
-if (wait_p == -1)
-{
-perror("Waiting");
+perror("Move ...");
+limit += 10;
 }
 }
-free(line);
 
+return (*len);
+}
+
+/**
+ * echoer - echoes back text
+ * @line: array of command, arguments
+ *
+ * Return: returns 1 in success. Otherwise -1
+ */
+
+int echoer(char *line[])
+{
+int i = 1;
+
+if (line[i] == NULL)
+{
+write(1, "\n", 2);
 return (1);
 }
 
-/**
-* set_exe - excutes the /bin/cat program to show text files
-* @line: an array of command and arguments
-*
-* Return: returns 1 in success. Otherwise -1
-*/
-
-int set_exe(char *line[])
+while (line[i] != NULL)
 {
-int state;
-pid_t wait_p, child;
-
-child = fork();
-if (child == -1)
+write(1, line[i], strleng(line[i]));
+i++;
+if (line[i] != NULL)
 {
-perror("Forking ...");
-}
-if (child == 0)
-{
-execve("/bin/cat", line, NULL);
-}
-else
-{
-wait_p = wait(&state);
-if (wait_p == -1)
-{
-perror("Waiting");
+write(1, " ", 2);
 }
 }
-free(line);
-
-return (1);
-}
-
-/**
-* unlisted - excutes when unlisted command entered
-* @line: is a pointer to pointer of characters
-*
-* Return: return integer
-*/
-
-int unlisted(char **line)
-{
-int state;
-pid_t wait_p, child;
-
-child = fork();
-if (child == -1)
-{
-perror("Forking ...");
-}
-
-if (child == 0)
-{
-execve(line[0], line, NULL);
-if (errno != 0)
-{
-return (errno);
-}
-}
-else
-{
-wait_p = wait(&state);
-
-if (wait_p == -1)
-{
-perror("Waiting");
-}
-}
-
-free(line);
-return (0);
-}
-
-/**
-* pwder - a function which prints the current path
-* @line: an array of command and arguments
-*
-* Return: returns 1 in success and -1 if it fails
-*/
-
-int pwder(char *line[])
-{
-int state;
-pid_t wait_p, child;
-
-child = fork();
-if (child == -1)
-perror("Forking ...");
-
-if (child == 0)
-{
-execve("/bin/pwd", line, NULL);
-}
-else
-{
-wait_p = wait(&state);
-if (wait_p == -1)
-perror("Waiting");
-}
-free(line);
-return (1);
-}
-
-/**
-* echorr - echo back any text
-* @line: array of command, arguments
-*
-* Return: returns 1 in success. Otherwise -1
-*/
-
-int echorr(char *line[])
-{
-int state;
-pid_t wait_p, child;
-
-child = fork();
-if (child == -1)
-{
-perror("Forking ...");
-}
-if (child == 0)
-{
-execve("/bin/echo", line, NULL);
-}
-else
-{
-wait_p = wait(&state);
-if (wait_p == -1)
-{
-perror("Waiting");
-}
-}
-free(line);
+write(1, "\n", 2);
 
 return (1);
 }
