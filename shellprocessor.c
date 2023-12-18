@@ -49,13 +49,13 @@ return (1);
 }
 
 /**
-* promptprompt - display the enter command character
+* printprompt - display the enter command character
 * @i: an integer value to show which icon to display
 *
 * Return: void
 */
 
-void promptprompt(int i)
+void printprompt(int i)
 {
 if (i == 0)
 {

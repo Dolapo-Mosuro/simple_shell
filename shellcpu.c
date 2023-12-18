@@ -47,7 +47,7 @@ return (selector[i].funcptr);
  * Return: returns 1 in success and -1 otherwise.
  */
 
-int shell_processor(char **line, char **argv)
+int shellprocessor(char **line, char **argv)
 {
 int check;
 int i = 0;
