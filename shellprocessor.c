@@ -9,15 +9,8 @@
 
 int exitor(char *line[])
 {
-int i = 0;
-if (line[1] == NULL)
-{
-exit(EXIT_SUCCESS); }
-else if (atoi(line[1]) > 0)
-{
-i = atoi(line[1]); }
 free(line);
-exit(i);
+exit(EXIT_SUCCESS);
 }
 
 /**
@@ -59,10 +52,10 @@ void printprompt(int i)
 {
 if (i == 0)
 {
-write(1, "USH$ ", strleng("USH$ "));
+write(1, "SHELL$ ", strleng("SHELL$ "));
 }
 else if (i == 1)
 {
-write(1, "ush> ", strleng("ush> "));
+write(1, "shell> ", strleng("shell> "));
 }
 }
